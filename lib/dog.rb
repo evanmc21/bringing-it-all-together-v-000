@@ -79,8 +79,8 @@ end
 def self.find_or_create_by(name:, breed:)
   dog = DB[:conn].execute("SELECT * FROM dogs WHERE name = ? AND album = ?", name, breed)
   if !dog.empty?
-    dog_data = dog[0]
-    dog = Dog.new(dog_data[0], dog_data[1], dog_data[2])
+    dog_data = dog[0] #grab dog data from the dog array of arrays
+    dog = Dog.new(dog_data[0], dog_data[1], dog_data[2]) #creates instance of dog if it doesn't already exist
   else
     dog = self.create(name: name, breed: breed)
   end
